@@ -1,0 +1,12 @@
+backup	NULL	cancel_rule	以航空公司及原网站规定为准。	不支持退改。
+backup	NULL	change_rule	以航空公司及原网站规定为准。	不支持退改。
+backup	NULL	endorsement_rule	NULL	NULL
+backup	NULL	miss_rule	NULL	NULL
+backup	NULL	package_rule	NULL	NULL
+backup	NULL	attached_rule	NULL	NULL
+option	@mioji_key_flightno_0101_0_mioji@:退票:[起飞前:|]@mioji_key_price_0102_0_mioji@%,	cancel_rule	航班@mioji_key_flightno_1101_0_mioji@退票需要收取@mioji_key_price_1102_0_mioji@。	航班@mioji_key_flightno_1101_0_mioji@退票需要收取@mioji_key_price_1102_0_mioji@。
+nouse	以上信息仅供参考，准确退改信息请咨询客服	NULL	NULL	NULL
+nouse	境外系统出票，报销凭证仅提供境外invoice报销	NULL	NULL	NULL
+nouse	请于工作日周一至周五9:00-18:00，并在航班起飞前48小时来电咨询。	NULL	NULL	NULL
+nouse	最短停留@mioji_any_6_15_mioji@最长停留@mioji_any_6_15_mioji@	NULL	NULL	NULL
+nouse	退票时，如客票部分使用，还需扣除已使用航段所适用运价；变更时，如票价变动，多不退少补，如需变更，请联系 95339	NULL	NULL	NULL

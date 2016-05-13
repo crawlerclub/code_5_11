@@ -5,6 +5,7 @@ import utils
 import re
 import sys
 import ConfigParser
+from collections  import defaultdict
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -24,7 +25,7 @@ def loadModel(config_file = './conf.ini',mode='config'):
     cf = ConfigParser.ConfigParser()
     cf.read(config_file)  
     #read price_pattern
-    price_pattern=[]
+    price_pattern={}
     price_pattern_file = cf.get('basic','price_pattern_file')
     price_pattern=re_price_pattern(price_pattern_file)
     return price_pattern
@@ -32,30 +33,96 @@ def loadModel(config_file = './conf.ini',mode='config'):
 
 special_char = ['(',')','{','}','$','#','+','*','?','.','^','<','!',':']
 
-mioji_price = re.compile(r'(@price@)',re.S)
-mioji_price_replace = '(.*?)'
+copy = re.compile(r'(@copy@)',re.S)
+copy_replace = '(.*?)'
+
+mioji_key_pat = re.compile(r'(@mioji_key_(?:.){5,20}_\d_mioji@)',re.S)
+mioji_key_replace = '(\d+.*)'
+
+def parser(pat_str):
+    for char in special_char:
+        pat_str = pat_str.replace(char,'\\'+char)
+
+    #pat_str = pat_str.replace('[','(?:').replace(']',')')
+
+    copy_find=copy.findall(pat_str)
+    for i in copy_find:
+        pat_str = pat_str.replace(i, copy_replace)
+
+    keys=[]
+    key_find=mioji_key_pat.findall(pat_str)
+    for i in key_find:
+        key_name,key_index = utils.parse_key_name_index(f.strip())
+        keys.append((key_name,key_index))
+        pat_str = pat_str.replace(i,mioji_key_replace)
+
+    re_pat = re.compile(r'%s'%pat_str,re.S)
+    return re_pat,keys,pat_str
+
+
+
+
+
+
+def  price_parser(line,patterns):
+    pat_type, pat_str=line.split('\t')
+    
+    if pat_type=='single':
+        re_pat, re_pat_str=parser(pat_str)
+        patterns[pat_type].append(re_pat)
+
+    elif pat_type == 'double':
+        re_pat, re_pat_str=parser(pat_str)
+        patterns[pat_type].append(re_pat)
+
+    elif pat_type == 'nouse':
+        re_pat, re_pat_str = parser(pat_str)
+        patterns[pat_type]=parser(re_pat)
+
+    elif pat_type == 'used':
+        re_pat, re_pat_str = parser(pat_str)
+        patterns[pat_type].append(re_pat)
+    
+    else:
+        pass
+    
+    return True
+
 
 
 
 def re_price_pattern(filename):
-    price_pattern=[]
+    price_pattern=defaultdict(list)
+
     for line in open(filename):
         if line.strip() == '':
             continue
         print "input is "+"\t"+line
-        for char in special_char:
-            line=line.replace(char, '\\'+char)
-
-        #step 2 提取mioji_price，并将 mioji_price 对应的位置替换为固定的字符串
-        find = mioji_price.findall(line)
-        for f in find:
-            line = line.replace(f, mioji_price_replace)
-
-        price_pat= re.compile(r'%s'%line,re.S)
-        print "output is "+"\t"+line
-        price_pattern.append(price_pat)
+        price_parser(line.strip(), price_pattern)
 
     return price_pattern
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,9 +141,15 @@ def mioji_key_flightno_1_parser(pat_instance,key_index):
     return flight_no
 
 
+
+
 # read price
 def mioji_key_price_0_parser(key_str,pat_instance,key_index):
-    pat_instance.same[key_index]=key_str
+    if key_str == '':
+        pat_instance.same[key_index]="以航空公司规定为准"
+    else:
+        pat_instance.same[key_index]=key_str
+        #print key_str
     return True
 
 

@@ -2,10 +2,11 @@
 
 #coding=utf-8
 import sys
+import random
 import os
-#sys.setdefaultencoding('utf-8')
+sys.setdefaultencoding('utf-8')
 
-
+'''
 def split_file(filename):
 	
 	with open(filename) as f:
@@ -32,3 +33,18 @@ def split_file(filename):
 
 
 split_file('kopu_test.txt')
+'''
+
+def buckets(filename, buckname, separator, classcolumn):
+	#put the data in 10 buckets
+	numberofbuckets = 10
+	data={}
+	#first read in the data and divide by category
+	with open (filename) as f:
+		lines = f.readlines()
+
+	for line in lines:
+		if separator != '\t':
+			line = line.replace(separator, '\t')
+			
+		

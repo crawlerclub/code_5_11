@@ -56,6 +56,8 @@ def re_price(filename):
 	return money
 
 
+
+
 price1=re.compile(r'(\d+(?:,)\d+(?:.)\d+)',re.S)    #1,600.00   1,600
 price2=re.compile(r'(\d+(?:.)\d+)',re.S)            #1600.00
 price3=re.compile(r'(\d+)',re.S)                    #1600

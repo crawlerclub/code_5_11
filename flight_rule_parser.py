@@ -111,25 +111,19 @@ def parse_text(text,source,patterns,rules,online_info):
                 # 找到以后，解析mioji_key字符串，解析出对应的信息
                 pInstance = PatternInstance(p,flight)
 
-               # print 'Pattern Rec: %s, %s'%(pInstance.pattern.pat_str,pInstance.pattern.rule)
-                
+                #print 'Pattern Rec: %s, %s'%(pInstance.pattern.pat_str,pInstance.pattern.rule)
                 # 解析mioji_key字符串中的信息。不同的mioji_key需要调用对应的parser
                 try:
                     if len(p.mioji_keys) > 0:
                         for i in range(len(p.mioji_keys)):
                             eval(key_parser[p.mioji_keys[i][0]])(finds[0][i+1],pInstance,p.mioji_keys[i][1])
-                            print finds[0][i+1]
+                            #print finds[0][i+1]
                 except:
                     # 不能正确解析mioji_key，跳过这个pattern
                     continue
                             
 
 
-                # 填充输出中的mioji_key需要的信息
-               # print "---------this is p.output_keys_common"
-               # for i in p.output_keys_common:
-                #    print i
-               # print "-------output_keys_common is over"
                 if len(p.output_keys_common) > 0:
                     for i in range(len(p.output_keys_common)):
                         key_name,key_index = utils.parse_key_name_index(p.output_keys_common[i])
@@ -139,6 +133,14 @@ def parse_text(text,source,patterns,rules,online_info):
                 # 拼接输出字符串--------问题出现在这里了   是怎么拼接的 
                 for i in range(len(pInstance.pattern.output_keys_common)):
                     pInstance.output_common = pInstance.output_common.replace(pInstance.pattern.output_keys_common[i],pInstance.common_output_content[i])
+                   # print "hello------------"
+                   # print pInstance.pattern.output_keys_common[i]
+                   # print pInstance.common_output_content[i]
+                   # print pInstance.output_common
+                   # print "over--------------"
+
+
+
 
                 if len(p.output_keys_eng) > 0:
                     for i in range(len(p.output_keys_eng)):

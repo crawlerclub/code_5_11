@@ -38,6 +38,7 @@ def loadModel(config_file = './conf.ini',mode='config'):
 all_rules, all_patterns = loadModel()
 
 
+
 # parser
 def parser(text,source):
 
@@ -150,12 +151,7 @@ def all_pattern_test(rf,source,wf):
     return True
 
 if __name__ == "__main__":
-    # test
-    rules, pattern=loadModel()
-    #print type(pattern['kopu'])
-    #print str(pattern['kopu']['option'])∫
-    #for i in pattern['kopu']['option']:
-    #    print i
+
    
 
     #line="AF1767:退票:不允许退票,改签:起飞前:120.00欧元, 起飞后:120.00欧元,误机:退票误机不允许退票，改期误机不允许退票。AF382:退票:不允许退票,改签:起飞前:120.00欧元, 起飞后:120.00欧元,误机:退票误机不允许退票，改期误机不允许退票。以上信息仅供参考，准确退改信息请咨询客服。改期和退票额外收取100元服务费。境外系统出票，报销凭证仅提供境外invoice报销"
@@ -165,12 +161,8 @@ if __name__ == "__main__":
     #source = sys.argv[1]
     rf = '%s_test.txt'  %source
     wf = '%s_result.txt'%source
-    #err_pattern_test(rf,source,wf)
+   # #err_pattern_test(rf,source,wf)
     all_pattern_test(rf,source,wf)
-
-
-    
-
 
 
     

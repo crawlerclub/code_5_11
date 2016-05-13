@@ -1,14 +1,28 @@
-[收取|退票|]@mioji_key_price_0_0_mioji@
-[收取|退票|]@mioji_key_price_0_0_mioji@
+single	[改期|退票|]@mioji_key_price_0_0_mioji@
+single	@mioji_key_price_0_0_mioji@
+
+double	起飞前:@mioji_key_price_0_0_mioji@,起飞后:@mioji_key_price_0_1_mioji@
+double	起飞前:@mioji_key_price_0_0_mioji@,起飞后:@copy@
+double	起飞前:@copy@,起飞后:@mioji_key_price_0_1_mioji@
+double	起飞前:@copy@,起飞后:@copy@
+
+double	@mioji_key_price_0_0_mioji@,换开客票费@mioji_key_price_0_1_mioji@
+double	改期有损失,换开客票费@mioji_key_price_0_0_mioji@
 
 
-退票:起飞前:@mioji_key_price_0_0_mioji@起飞后:@mioji_key_price_0_1_mioji@
-退票:起飞前:@mioji_key_price_0_0_mioji@起飞后:@mioji_key_copy_0_1_mioji@
-退票:起飞前:@mioji_key_copy_0_0_mioji@起飞后:@mioji_key_price_0_1_mioji@
-退票:起飞前:@mioji_key_copy_0_0_mioji@起飞后:@mioji_key_copy_0_1_mioji@
+double	退票@mioji_key_price_0_0_mioji@改期@mioji_key_price_0_1_mioji@
+double	退票@copy@改期@mioji_key_price_0_1_mioji@
+double	退票@copy@改期@copy@
+double	退票@mioji_key_price_0_0_mioji@改期@copy@
 
-开客票费@mioji_key_price_0_0_mioji@
+nouse	不允许改期
+nouse	退票误机不允许退票
+nouse	改期误机不允许退票
+nouse	改期有损失
+nouse	退票有损失
+nouse	不允许退票
 
+used	扣除单程票价
 
 
 

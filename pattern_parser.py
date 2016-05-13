@@ -38,8 +38,6 @@ def re_parse(pat_str):
         key_name,key_index = utils.parse_key_name_index(f.strip())
         mioji_keys.append((key_name,key_index))
         pat_str = pat_str.replace(f,mioji_key_replace)
-    #print "--------------------"
-    #print mioji_keys
     # step3，转换成正则表达式
     #print pat_str
 

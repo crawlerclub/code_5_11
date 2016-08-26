@@ -3,7 +3,7 @@
 
 '''
     @date: 20160301
-    @author: zhangbin
+    @author: jmq
     @desc: flight return&cancel rule parser, from parse to display
 '''
 
